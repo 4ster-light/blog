@@ -5,7 +5,6 @@ edition = "2021"
 
 [dependencies]
 chrono = { version = "0.4.38", features = ["serde"] }
-glob = "0.3.1"
 maud = { version = "0.26.0", features = ["rocket"] }
 pulldown-cmark = "0.12.2"
 rocket = "0.5.1"

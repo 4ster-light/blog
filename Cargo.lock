@@ -127,7 +127,6 @@ name = "blog"
 version = "0.1.0"
 dependencies = [
  "chrono",
- "glob",
  "maud",
  "pulldown-cmark",
  "rocket",
