@@ -1,0 +1,5 @@
+title = "My SECOND Blog Post"
+description = "This is my SECOND blog post about Haskell."
+date = "2024-03-15T12:00:00Z"
+tags = ["haskell", "programming"]
+image = "/static/images/first-post.jpg"
