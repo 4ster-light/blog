@@ -5,10 +5,7 @@ use rocket::launch;
 
 mod models;
 mod templates;
-mod router;
-
-use crate::models::post::Post;
-use crate::router::routes;
+mod routes;
 
 #[launch]
 fn rocket() -> _ {
@@ -27,14 +24,15 @@ fn rocket() -> _ {
     rocket::build()
         .mount("/", rocket::routes![
             routes::index,
-            routes::post,
-            routes::about
+            routes::about,
+            routes::contact,
+            routes::posts,
         ])
         .mount("/static", FileServer::from("static"))
         .manage(posts)
 }
 
-fn load_posts() -> std::io::Result<Vec<Post>> {
+fn load_posts() -> std::io::Result<Vec<models::Post>> {
     let content_dir = PathBuf::from("content/posts");
     let mut posts = Vec::new();
     
@@ -50,7 +48,7 @@ fn load_posts() -> std::io::Result<Vec<Post>> {
         println!("Found entry: {:?}", entry.path());
         
         if entry.file_type()?.is_dir() {
-            match Post::load(entry.path()) {
+            match models::Post::load(entry.path()) {
                 Ok(post) => {
                     println!("Successfully loaded post: {}", post.meta.title);
                     posts.push(post);
