@@ -1,6 +1,7 @@
 use serde::{Deserialize, Serialize};
 use std::path::PathBuf;
 use chrono::{DateTime, Utc};
+use pulldown_cmark::{html, Options, Parser};
 
 #[derive(Serialize, Deserialize, Debug)]
 pub struct PostMeta {
@@ -31,13 +32,13 @@ impl Post {
     }
 
     pub fn render_content(&self) -> String {
-        let mut options = pulldown_cmark::Options::empty();
-        options.insert(pulldown_cmark::Options::ENABLE_STRIKETHROUGH);
-        options.insert(pulldown_cmark::Options::ENABLE_TABLES);
+        let mut options = Options::empty();
+        options.insert(Options::ENABLE_STRIKETHROUGH);
+        options.insert(Options::ENABLE_TABLES);
         
-        let parser = pulldown_cmark::Parser::new_ext(&self.content, options);
+        let parser = Parser::new_ext(&self.content, options);
         let mut html = String::new();
-        pulldown_cmark::html::push_html(&mut html, parser);
+        html::push_html(&mut html, parser);
         html
     }
 }

@@ -25,7 +25,7 @@ pub fn layout(title: &str, meta: Option<&PostMeta>, content: Markup) -> Markup {
                 header class="border-b border-gruvbox-border-light dark:border-gruvbox-border-dark bg-gruvbox-bg-s dark:bg-gruvbox-bg-h-dark shadow-sm" {
                     nav class="max-w-3xl mx-auto px-6 py-4" {
                         div class="flex justify-between items-center" {
-                            a href="/" class="text-2xl font-bold text-gruvbox-yellow dark:text-gruvbox-orange-bright hover:text-gruvbox-orange dark:hover:text-gruvbox-yellow-bright transform transition duration-300 hover:-translate-y-1 hover:shadow-md" {
+                            a href="/" class="text-2xl font-bold text-gruvbox-yellow dark:text-gruvbox-orange-bright hover:text-gruvbox-orange dark:hover:text-gruvbox-yellow-bright transform transition duration-300" {
                                 (TITLE)
                             }
                             div class="space-x-8" {
@@ -37,6 +37,18 @@ pub fn layout(title: &str, meta: Option<&PostMeta>, content: Markup) -> Markup {
                     }
                 }
                 main class="flex-grow max-w-3xl mx-auto px-6 py-8 w-full" {
+                    /* TODO: ADD PRESENTATION CARD
+
+                    // PRESENTATION
+                    img src="/static/images/pfp.jpg" alt="profile picture" class="h-40 w-auto rounded-full mb-6" {}
+                    
+                    // POSTS HEADER
+                    h1 class="text-3xl font-bold mb-4 text-gruvbox-fg dark:text-gruvbox-fg-dark" {
+                        "Blog Posts:"
+                    }
+                    hr class="mb-4 border-t border-gruvbox-border-light dark:border-gruvbox-border-dark" {}
+                    
+                    */
                     (content)
                 }
                 footer class="mt-auto border-t border-gruvbox-border-light dark:border-gruvbox-border-dark bg-gruvbox-bg-s dark:bg-gruvbox-bg-h-dark shadow-sm" {
