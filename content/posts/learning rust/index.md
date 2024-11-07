@@ -1,3 +1,5 @@
+# Learning Rust
+
 This is the content of my first blog post. It supports **Markdown** formatting!
 
 ## Code Examples

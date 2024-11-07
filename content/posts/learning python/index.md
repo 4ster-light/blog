@@ -65,10 +65,6 @@ By implementing these strategies, we can help bridge the gap between knowing Pyt
 
 ---
 
-<aside>
-<img src="https://www.notion.so/icons/bookmark_blue.svg" alt="https://www.notion.so/icons/bookmark_blue.svg" width="40px" /> Thank you for reading this, and come back any time! I will keep posting about my journey and any interesting topic related to software engineering.
-
-</aside>
-
 > My contact information is available in the main page for anyone that would like to reach out to me, I may take some time to answer mails, but my DMs are always open.
+> Thank you for reading this, and come back any time! I will keep posting about my journey and any interesting topic related to software engineering.
 >
