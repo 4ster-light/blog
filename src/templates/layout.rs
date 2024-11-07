@@ -1,7 +1,6 @@
+use super::TITLE;
 use crate::models::PostMeta;
 use maud::{html, Markup, DOCTYPE};
-
-use super::TITLE;
 
 pub fn layout(title: &str, meta: Option<&PostMeta>, content: Markup) -> Markup {
     html! {
@@ -21,6 +20,7 @@ pub fn layout(title: &str, meta: Option<&PostMeta>, content: Markup) -> Markup {
                 title { (title) " | " (TITLE) }
                 link rel="stylesheet" href="/static/css/tailwind.css";
             }
+
             body class="min-h-screen flex flex-col bg-gruvbox-bg dark:bg-gruvbox-bg-dark text-gruvbox-fg dark:text-gruvbox-fg-dark transition-colors duration-300" {
                 header class="border-b border-gruvbox-border-light dark:border-gruvbox-border-dark bg-gruvbox-bg-s dark:bg-gruvbox-bg-h-dark shadow-sm" {
                     nav class="max-w-3xl mx-auto px-6 py-4" {
@@ -36,21 +36,9 @@ pub fn layout(title: &str, meta: Option<&PostMeta>, content: Markup) -> Markup {
                         }
                     }
                 }
-                main class="flex-grow max-w-3xl mx-auto px-6 py-8 w-full" {
-                    /* TODO: ADD PRESENTATION CARD
 
-                    // PRESENTATION
-                    img src="/static/images/pfp.jpg" alt="profile picture" class="h-40 w-auto rounded-full mb-6" {}
-                    
-                    // POSTS HEADER
-                    h1 class="text-3xl font-bold mb-4 text-gruvbox-fg dark:text-gruvbox-fg-dark" {
-                        "Blog Posts:"
-                    }
-                    hr class="mb-4 border-t border-gruvbox-border-light dark:border-gruvbox-border-dark" {}
-                    
-                    */
-                    (content)
-                }
+                main class="flex-grow max-w-3xl mx-auto px-6 py-8 w-full" { (content) }
+
                 footer class="mt-auto border-t border-gruvbox-border-light dark:border-gruvbox-border-dark bg-gruvbox-bg-s dark:bg-gruvbox-bg-h-dark shadow-sm" {
                     div class="max-w-3xl mx-auto px-6 py-4 text-center text-gruvbox-fg dark:text-gruvbox-fg-dark" {
                         p { "© 2024 " (TITLE) }
