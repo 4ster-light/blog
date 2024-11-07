@@ -1,5 +1,5 @@
 use super::layout;
-use crate::models::Post;
+use crate::{models::Post, templates::TITLE};
 use maud::{html, Markup};
 
 pub fn index_page(posts: &[Post]) -> Markup {
@@ -7,6 +7,11 @@ pub fn index_page(posts: &[Post]) -> Markup {
         "Home",
         None,
         html! {
+            (presentation_card())
+
+            h1 class="text-4xl font-bold text-center text-gruvbox-gray dark:text-gruvbox-gray-dark mt-20" { "Blog Posts" }
+            hr class="border-t border-gruvbox-border-light dark:border-gruvbox-border-dark mt-3 mb-5 font-mono" {}
+
             div class="space-y-8" {
                 @for post in posts {
                     (post_card(post))
@@ -14,6 +19,20 @@ pub fn index_page(posts: &[Post]) -> Markup {
             }
         },
     )
+}
+
+fn presentation_card() -> Markup {
+    html! {
+        div class="bg-gruvbox-bg-s dark:bg-gruvbox-bg-s-dark rounded-lg p-6 shadow-md" {
+            div class="flex items-center space-x-6" {
+                img src="/static/images/pfp.jpg" alt="profile picture" class="h-20 w-20 rounded-full" {}
+                div {
+                    h1 class="text-2xl font-bold text-gruvbox-yellow dark:text-gruvbox-orange-bright" { "David Vivar Bogónez" }
+                    p class="text-gruvbox-fg dark:text-gruvbox-fg-dark" { "aka: " (TITLE) }
+                }
+            }
+        }
+    }
 }
 
 fn post_card(post: &Post) -> Markup {

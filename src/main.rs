@@ -36,6 +36,7 @@ fn load_posts() -> std::io::Result<Vec<models::Post>> {
     let content_dir = PathBuf::from("content/posts");
     let mut posts = Vec::new();
     
+    println!();
     println!("Attempting to load posts from: {:?}", content_dir);
 
     if !content_dir.exists() {
@@ -44,6 +45,8 @@ fn load_posts() -> std::io::Result<Vec<models::Post>> {
     }
     
     for entry in std::fs::read_dir(content_dir)? {
+        println!();
+        
         let entry = entry?;
         println!("Found entry: {:?}", entry.path());
         
@@ -60,6 +63,9 @@ fn load_posts() -> std::io::Result<Vec<models::Post>> {
         }
     }
     
+    println!();
     println!("Total posts loaded: {}", posts.len());
+    println!();
+
     Ok(posts)
 }

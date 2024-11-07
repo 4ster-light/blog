@@ -39,6 +39,7 @@ impl Post {
         let parser = Parser::new_ext(&self.content, options);
         let mut html = String::new();
         html::push_html(&mut html, parser);
+        
         html
     }
 }
