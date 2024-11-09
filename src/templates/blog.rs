@@ -13,11 +13,11 @@ pub fn post_page(post: &Post) -> Markup {
                         if let Some(img) = &post.meta.image {
                             img
                         } else {
-                            "/static/images/placeholder.png"
+                            "/static/images/placeholder.webp"
                         }
                     ) alt="Post image" {}
 
-                    h1 class="text-4xl font-bold mb-4 text-gruvbox-yellow dark:text-gruvbox-orange-bright" {
+                    h1 class="text-4xl font-bold mb-4 text-gruvbox-yellow dark:text-gruvbox-orange-bright text-balance" {
                         (post.meta.title)
                     }
 
@@ -36,7 +36,7 @@ pub fn post_page(post: &Post) -> Markup {
                     }
                 }
 
-                div class="prose dark:prose-invert prose-base max-w-none" {
+                div class="prose dark:prose-invert prose-base max-w-none text-pretty" {
                     (maud::PreEscaped(post.render_content()))
                 }
             }

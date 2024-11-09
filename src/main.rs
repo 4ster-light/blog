@@ -47,7 +47,6 @@ fn load_posts() -> std::io::Result<Vec<models::Post>> {
 
         let entry = entry?;
         let path = entry.path();
-        println!("Found entry: {:?}", path);
 
         // Check if it's a .md file
         if entry.file_type()?.is_file() && path.extension().map_or(false, |ext| ext == "md") {

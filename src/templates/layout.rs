@@ -15,6 +15,8 @@ pub fn layout(title: &str, meta: Option<&PostMeta>, content: Markup) -> Markup {
                     meta property="og:description" content=(meta.description);
                     @if let Some(image) = &meta.image {
                         meta property="og:image" content=(image);
+                    } else {
+                        meta property="og:image" content="/static/images/placeholder.webp";
                     }
                 }
                 title { (title) " | " (TITLE) }

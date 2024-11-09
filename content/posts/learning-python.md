@@ -3,7 +3,7 @@ title: "Python and Junior Developers"
 description: "Why Python's simplicity and popularity can be a problem for Junior Developers."
 date: "2024-11-09"
 tags: ["python", "job market", "programming"]
-image: "/static/images/posts/learning-python.png"
+# image: "/static/images/posts/learning-python.png"
 ---
 
 I wanted to talk about this ever since I started feeling confident enough to say “I KNOW Python” (a bit cocky of me since I have a lot to learn of course, but you understand the point). As everyone reading this probably knows, Python has an extremely simple syntax, the typical coding example you may show to someone that has never coded before reads just as plain English language in most of it.
