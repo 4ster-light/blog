@@ -1,7 +1,10 @@
-# Python and Junior Developers
-
-Created: August 25, 2024 6:56 PM
-Tags: Coding, Job Market, Python
+---
+title: "Python and Junior Developers"
+description: "Why Python's simplicity and popularity can be a problem for Junior Developers."
+date: "2024-11-09"
+tags: ["python", "job market", "programming"]
+image: "/static/images/posts/learning-python.png"
+---
 
 I wanted to talk about this ever since I started feeling confident enough to say “I KNOW Python” (a bit cocky of me since I have a lot to learn of course, but you understand the point). As everyone reading this probably knows, Python has an extremely simple syntax, the typical coding example you may show to someone that has never coded before reads just as plain English language in most of it.
 
@@ -65,6 +68,6 @@ By implementing these strategies, we can help bridge the gap between knowing Pyt
 
 ---
 
-> My contact information is available in the main page for anyone that would like to reach out to me, I may take some time to answer mails, but my DMs are always open.
+> My contact information is available in [the contact page](/contact) for anyone that would like to reach out to me.
 > Thank you for reading this, and come back any time! I will keep posting about my journey and any interesting topic related to software engineering.
 >

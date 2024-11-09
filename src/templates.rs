@@ -1,9 +1,13 @@
-mod layout;
+mod blog;
 mod index;
-mod posts;
+mod layout;
+mod about;
+mod contact;
 
-pub use layout::layout;
+pub use blog::post_page;
 pub use index::index_page;
-pub use posts::post_page;
+pub use layout::layout;
+pub use about::about_page;
+pub use contact::contact_page;
 
 pub const TITLE: &str = "✰λster✰";

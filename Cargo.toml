@@ -9,4 +9,4 @@ maud = { version = "0.26.0", features = ["rocket"] }
 pulldown-cmark = "0.12.2"
 rocket = "0.5.1"
 serde = { version = "1.0.214", features = ["derive"] }
-toml = "0.8.19"
+serde_yaml = "0.9.34"

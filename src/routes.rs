@@ -1,9 +1,9 @@
+use rocket::get;
 use rocket::response::content::RawHtml;
 use std::sync::Mutex;
-use rocket::get;
 
 use crate::models::Post;
-use crate::templates::{index_page, layout, post_page};
+use crate::templates::{about_page, contact_page, index_page, post_page};
 
 #[get("/")]
 pub fn index(posts: &rocket::State<Mutex<Vec<Post>>>) -> RawHtml<String> {
@@ -13,41 +13,12 @@ pub fn index(posts: &rocket::State<Mutex<Vec<Post>>>) -> RawHtml<String> {
 
 #[get("/about")]
 pub fn about() -> RawHtml<String> {
-    RawHtml(layout(
-        "About",
-        None,
-        maud::html! {
-            div class="prose dark:prose-invert lg:prose-lg mx-auto" {
-                p { "Welcome to my blog! This is a simple blog built with Rust, Rocket, and Maud." }
-                p { 
-                    "The blog posts are written in Markdown and stored in the content directory. "
-                    "The site is styled using Tailwind CSS and supports both light and dark modes."
-                }
-            }
-        },
-    ).into_string())
+    RawHtml(about_page().into_string())
 }
 
 #[get("/contact")]
 pub fn contact() -> RawHtml<String> {
-    RawHtml(layout(
-        "Contact",
-        None,
-        maud::html! {
-            div class="prose dark:prose-invert lg:prose-lg mx-auto" {
-                p { "If you have any questions or feedback, please don't hesitate to get in touch!" }
-                p { 
-                    "You can reach me on any of the following platforms:"
-                }
-                ul {
-                    li { a href="https://twitter.com/4ster_light" { "Twitter / X" } }
-                    li { a href="https://github.com/4ster-light" { "GitHub" } }
-                    li { a href="https://bsky.app/profile/4ster-light.bsky.social" { "BlueSky" } }
-                    li { a href="mailto:davidvivarbogonez@gmail.com" { "Email" } }
-                }
-            }
-        },
-    ).into_string())
+    RawHtml(contact_page().into_string())
 }
 
 #[get("/posts/<slug>")]

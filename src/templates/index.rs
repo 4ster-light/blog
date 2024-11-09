@@ -43,8 +43,8 @@ fn post_card(post: &Post) -> Markup {
                             (post.meta.title)
                     }
                     div class="flex items-center space-x-3 mb-3" {
-                        time class="text-sm font-medium text-gruvbox-fg dark:text-gruvbox-fg-dark" datetime=(post.meta.date.format("%Y-%m-%d")) {
-                            (post.meta.date.format("%B %d, %Y"))
+                        time class="text-sm font-medium text-gruvbox-fg dark:text-gruvbox-fg-dark" datetime=(post.meta.date().format("%Y-%m-%d")) {
+                            (post.meta.date().format("%B %d, %Y"))
                         }
                         div class="flex flex-wrap gap-1.5" {
                             @for tag in &post.meta.tags {

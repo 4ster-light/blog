@@ -19,6 +19,11 @@ pub fn layout(title: &str, meta: Option<&PostMeta>, content: Markup) -> Markup {
                 }
                 title { (title) " | " (TITLE) }
                 link rel="stylesheet" href="/static/css/tailwind.css";
+
+                // Prism CSS
+                link rel="stylesheet" href="/static/css/code.css";
+                // Copy button
+                link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/plugins/toolbar/prism-toolbar.min.css" {}
             }
 
             body class="min-h-screen flex flex-col bg-gruvbox-bg dark:bg-gruvbox-bg-dark text-gruvbox-fg dark:text-gruvbox-fg-dark transition-colors duration-300" {
@@ -44,6 +49,13 @@ pub fn layout(title: &str, meta: Option<&PostMeta>, content: Markup) -> Markup {
                         p { "© 2024 " (TITLE) }
                     }
                 }
+
+                // Prism JS
+                script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-core.min.js" {}
+                script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/plugins/autoloader/prism-autoloader.min.js" {}
+                // Copy button
+                script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/plugins/toolbar/prism-toolbar.min.js" {}
+                script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/plugins/copy-to-clipboard/prism-copy-to-clipboard.min.js" {}
             }
         }
     }
