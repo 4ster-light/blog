@@ -7,9 +7,9 @@ use std::path::PathBuf;
 pub struct PostMeta {
     pub title: String,
     pub description: String,
-    pub date: String,  // Changed to single String
-    #[serde(skip)]  // Internal field for parsed date, skip both serializing and deserializing
-    pub parsed_date: DateTime<Utc>,
+    pub date: String,
+    #[serde(skip)]
+    parsed_date: DateTime<Utc>,
     pub tags: Vec<String>,
     pub image: Option<String>,
 }
@@ -25,17 +25,17 @@ impl Post {
     pub fn load(path: PathBuf) -> Result<Self, Box<dyn std::error::Error>> {
         let content = std::fs::read_to_string(&path)?;
         let slug = extract_slug(&path)?;
-        
+
         let (frontmatter, markdown_content) = split_content(&content)?;
         let mut meta: PostMeta = serde_yaml::from_str(frontmatter)?;
         parse_date(&mut meta)?;
-    
+
         Ok(Post {
             slug,
             content: markdown_content.to_string(),
             meta,
         })
-    }    
+    }
 
     pub fn render_content(&self) -> String {
         let mut options = Options::empty();
@@ -74,7 +74,8 @@ fn parse_date(meta: &mut PostMeta) -> Result<(), Box<dyn std::error::Error>> {
     match chrono::NaiveDate::parse_from_str(&meta.date, "%Y-%m-%d") {
         Ok(date) => {
             // Convert the date to DateTime<Utc> by setting the time to midnight UTC
-            let datetime = date.and_hms_opt(0, 0, 0)
+            let datetime = date
+                .and_hms_opt(0, 0, 0)
                 .ok_or_else(|| "Failed to create datetime")?;
             meta.parsed_date = DateTime::from_naive_utc_and_offset(datetime, Utc);
             Ok(())

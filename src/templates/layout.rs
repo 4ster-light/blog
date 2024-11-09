@@ -23,7 +23,7 @@ pub fn layout(title: &str, meta: Option<&PostMeta>, content: Markup) -> Markup {
                 // Prism CSS
                 link rel="stylesheet" href="/static/css/code.css";
                 // Copy button
-                link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/plugins/toolbar/prism-toolbar.min.css" {}
+                link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/plugins/toolbar/prism-toolbar.min.css";
             }
 
             body class="min-h-screen flex flex-col bg-gruvbox-bg dark:bg-gruvbox-bg-dark text-gruvbox-fg dark:text-gruvbox-fg-dark transition-colors duration-300" {
