@@ -2,6 +2,7 @@ use super::TITLE;
 use crate::models::PostMeta;
 use maud::{html, Markup, DOCTYPE};
 
+/// Renders the base layout
 pub fn layout(title: &str, meta: Option<&PostMeta>, content: Markup) -> Markup {
     html! {
         (DOCTYPE)
@@ -9,6 +10,8 @@ pub fn layout(title: &str, meta: Option<&PostMeta>, content: Markup) -> Markup {
             head {
                 meta charset="utf-8";
                 meta name="viewport" content="width=device-width, initial-scale=1.0";
+
+                // Meta SEO for blog posts
                 @if let Some(meta) = meta {
                     meta name="description" content=(meta.description);
                     meta property="og:title" content=(meta.title);
@@ -19,12 +22,12 @@ pub fn layout(title: &str, meta: Option<&PostMeta>, content: Markup) -> Markup {
                         meta property="og:image" content="/static/images/placeholder.webp";
                     }
                 }
+                
                 title { (title) " | " (TITLE) }
                 link rel="stylesheet" href="/static/css/tailwind.css";
-
-                // Prism CSS
                 link rel="stylesheet" href="/static/css/code.css";
-                // Copy button
+
+                // * Copy button
                 link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/plugins/toolbar/prism-toolbar.min.css";
             }
 
@@ -52,13 +55,16 @@ pub fn layout(title: &str, meta: Option<&PostMeta>, content: Markup) -> Markup {
                     }
                 }
 
-                // Prism JS
+                // * Prism JS
                 script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-core.min.js" {}
                 script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/plugins/autoloader/prism-autoloader.min.js" {}
-                // Copy button
+                // * Copy button
                 script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/plugins/toolbar/prism-toolbar.min.js" {}
                 script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/plugins/copy-to-clipboard/prism-copy-to-clipboard.min.js" {}
             }
         }
     }
 }
+
+// Prism JS is used for syntax highlighting
+// And Copy button for code blocks functionality

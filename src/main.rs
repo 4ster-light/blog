@@ -1,3 +1,4 @@
+use models::Post;
 use rocket::fs::FileServer;
 use rocket::launch;
 use std::path::PathBuf;
@@ -30,7 +31,8 @@ fn rocket() -> _ {
         .manage(posts)
 }
 
-fn load_posts() -> std::io::Result<Vec<models::Post>> {
+/// Loads all posts from the content directory at server startup
+fn load_posts() -> std::io::Result<Vec<Post>> {
     let content_dir = PathBuf::from("content/posts");
     let mut posts = Vec::new();
 
@@ -52,7 +54,7 @@ fn load_posts() -> std::io::Result<Vec<models::Post>> {
         if entry.file_type()?.is_file() && path.extension().map_or(false, |ext| ext == "md") {
             println!("Found markdown file at: {:?}", path);
 
-            match models::Post::load(path.clone()) {
+            match Post::load(path.clone()) {
                 Ok(post) => {
                     println!("Successfully loaded post: {}", post.meta.title);
                     posts.push(post);

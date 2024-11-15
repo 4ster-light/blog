@@ -2,6 +2,7 @@ use super::layout;
 use crate::models::Post;
 use maud::{html, Markup};
 
+/// Renders a single post page
 pub fn post_page(post: &Post) -> Markup {
     layout(
         &post.meta.title,

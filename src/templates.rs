@@ -10,4 +10,5 @@ pub use layout::layout;
 pub use about::about_page;
 pub use contact::contact_page;
 
+/// The title of the page
 pub const TITLE: &str = "✰λster✰";

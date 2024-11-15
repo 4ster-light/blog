@@ -2,6 +2,7 @@ use super::layout;
 use crate::{models::Post, templates::TITLE};
 use maud::{html, Markup};
 
+/// Renders the index page (home)
 pub fn index_page(posts: &[Post]) -> Markup {
     layout(
         "Home",
@@ -21,6 +22,8 @@ pub fn index_page(posts: &[Post]) -> Markup {
     )
 }
 
+// TODO: Make it a side bar along with the navigation
+/// Renders the presentation card
 fn presentation_card() -> Markup {
     html! {
         div class="bg-gruvbox-bg-s dark:bg-gruvbox-bg-s-dark rounded-lg p-6 shadow-md" {
@@ -35,6 +38,7 @@ fn presentation_card() -> Markup {
     }
 }
 
+/// Renders a single post card
 fn post_card(post: &Post) -> Markup {
     html! {
         a href={"/posts/" (post.slug)} class="block" {

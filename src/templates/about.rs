@@ -1,6 +1,7 @@
 use super::layout;
 use maud::{html, Markup};
 
+/// Renders the about page (personal info)
 pub fn about_page() -> Markup {
     layout(
         "About",

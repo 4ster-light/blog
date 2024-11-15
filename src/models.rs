@@ -3,6 +3,7 @@ use pulldown_cmark::{Options, Parser};
 use serde::{Deserialize, Serialize};
 use std::path::PathBuf;
 
+/// Represents the metadata of a post
 #[derive(Serialize, Deserialize, Debug)]
 pub struct PostMeta {
     pub title: String,
@@ -14,6 +15,7 @@ pub struct PostMeta {
     pub image: Option<String>,
 }
 
+/// Represents a post
 #[derive(Serialize, Deserialize)]
 pub struct Post {
     pub slug: String,
@@ -22,6 +24,7 @@ pub struct Post {
 }
 
 impl Post {
+    /// Loads a post from a file path
     pub fn load(path: PathBuf) -> Result<Self, Box<dyn std::error::Error>> {
         let content = std::fs::read_to_string(&path)?;
         let slug = extract_slug(&path)?;
@@ -37,6 +40,7 @@ impl Post {
         })
     }
 
+    /// Renders the post's content as HTML
     pub fn render_content(&self) -> String {
         let mut options = Options::empty();
         options.insert(Options::ENABLE_STRIKETHROUGH);
@@ -51,6 +55,7 @@ impl Post {
 }
 
 impl PostMeta {
+    /// Returns the post's date
     pub fn date(&self) -> &DateTime<Utc> {
         &self.parsed_date
     }

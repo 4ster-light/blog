@@ -1,6 +1,7 @@
 use super::layout;
 use maud::{html, Markup};
 
+/// Renders the contact page (socials etc)
 pub fn contact_page() -> Markup {
     layout(
         "Contact",
