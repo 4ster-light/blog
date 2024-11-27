@@ -3,6 +3,7 @@
 all: run
 
 build:
+	@bun i
 	@bun run build:css
 	@cargo build --release
 
