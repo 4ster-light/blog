@@ -23,10 +23,12 @@ fn rocket() -> _ {
     };
 
     rocket::build()
-        .mount(
-            "/",
-            rocket::routes![routes::index, routes::about, routes::contact, routes::posts,],
-        )
+        .mount("/", rocket::routes![
+            routes::index,
+            routes::about,
+            routes::contact,
+            routes::posts
+        ])
         .mount("/static", FileServer::from("static"))
         .manage(posts)
 }
@@ -34,41 +36,43 @@ fn rocket() -> _ {
 /// Loads all posts from the content directory at server startup
 fn load_posts() -> std::io::Result<Vec<Post>> {
     let content_dir = PathBuf::from("content/posts");
-    let mut posts = Vec::new();
 
-    println!();
-    println!("Attempting to load posts from: {:?}", content_dir);
+    println!("\nAttempting to load posts from: {:?}\n", content_dir);
 
     if !content_dir.exists() {
         eprintln!("Content directory does not exist!");
         return Ok(Vec::new());
     }
 
-    for entry in std::fs::read_dir(content_dir)? {
-        println!();
-
-        let entry = entry?;
-        let path = entry.path();
-
-        // Check if it's a .md file
-        if entry.file_type()?.is_file() && path.extension().map_or(false, |ext| ext == "md") {
-            println!("Found markdown file at: {:?}", path);
-
-            match Post::load(path.clone()) {
-                Ok(post) => {
-                    println!("Successfully loaded post: {}", post.meta.title);
-                    posts.push(post);
-                }
+    let posts: Vec<Post> = std::fs::read_dir(&content_dir)?
+        .filter_map(|entry| {
+            let path = match entry {
+                Ok(e) => e.path(),
                 Err(e) => {
-                    eprintln!("Error loading post at {:?}: {}", path, e);
+                    eprintln!("Error reading directory entry: {}", e);
+                    return None;
                 }
-            }
-        }
-    }
+            };
 
-    println!();
-    println!("Total posts loaded: {}", posts.len());
-    println!();
+            if path.extension().map_or(false, |ext| ext == "md") {
+                println!("Found markdown file at: {:?}", path);
+                match Post::load(path.clone()) {
+                    Ok(post) => {
+                        println!("Successfully loaded post: {}", post.meta.title);
+                        Some(post)
+                    }
+                    Err(e) => {
+                        eprintln!("Error loading post at {:?}: {}", path, e);
+                        None
+                    }
+                }
+            } else {
+                None
+            }
+        })
+        .collect();
+
+    println!("\nTotal posts loaded: {}\n", posts.len());
 
     Ok(posts)
 }

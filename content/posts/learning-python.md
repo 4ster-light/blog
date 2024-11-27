@@ -3,7 +3,7 @@ title: "Python and Junior Developers"
 description: "Why Python's simplicity and popularity can be a problem for Junior Developers."
 date: "2024-11-09"
 tags: ["python", "job market", "programming"]
-# image: "/static/images/posts/learning-python.png"
+image: "/static/images/posts/learning-python.webp"
 ---
 
 I wanted to talk about this ever since I started feeling confident enough to say “I KNOW Python” (a bit cocky of me since I have a lot to learn of course, but you understand the point). As everyone reading this probably knows, Python has an extremely simple syntax, the typical coding example you may show to someone that has never coded before reads just as plain English language in most of it.
@@ -19,32 +19,32 @@ And then you ask this “Python devs” to implement some coding example that is
 ```python
 class PrimeGenerator:
     def __init__(self):
-        self.primes = []
-        self.next_to_check = 2
+        self.primes = []  # List to store prime numbers
+        self.current = 2  # Start checking from 2 (the first prime number)
 
     def __iter__(self):
         return self
 
-    def __next__(self):
+    def __next__(self) -> int:
+        # Find the next prime number
         while True:
-            if all(self.next_to_check % prime != 0 for prime in self.primes):
-                self.primes.append(self.next_to_check)
-                return self.next_to_check
-            self.next_to_check += 1
+            if all(self.current % prime != 0 for prime in self.primes):
+                self.primes.append(self.current)
+                prime = self.current
+                self.current += 1
+                return prime
+            self.current += 1
 
     def sieve(self):
-        while True:
-            prime = next(self)
+        # Generator that yields primes using a sieve-like approach
+        for prime in self:
             yield prime
+            # Remove multiples of the current prime from further consideration
             self.primes = [p for p in self.primes if p <= prime]
-            self = PrimeGenerator()
-            self.primes = [p for p in self.primes if p <= prime]
-            for p in self.primes:
-                self.next_to_check = max(self.next_to_check, p + 1)
-            self = (x for x in self if x % prime != 0)
 
-    def take(self, n):
-        return [next(self.sieve()) for _ in range(n)]
+    # Generate the first n primes
+    def take(self, n: int) -> list[int]:
+        return [next(self) for _ in range(n)]
 ```
 
 They may not even know what to do, some of them having no clue or previous knowledge of the `yield` keyword existing in Python.
