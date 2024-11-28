@@ -1,4 +1,4 @@
-.PHONY: all build run prod
+.PHONY: all build run
 
 all: run
 
@@ -10,6 +10,3 @@ build:
 run:
 	@bun run build:css
 	@cargo run
-
-prod:
-	@./target/release/blog
