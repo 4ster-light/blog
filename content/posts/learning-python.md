@@ -1,7 +1,7 @@
 ---
 title: "Python and Junior Developers"
 description: "Why Python's simplicity and popularity can be a problem at times"
-date: "2024-11-09"
+date: "2024-12-02"
 tags: ["python", "job market", "programming"]
 image: "/static/images/posts/learning-python.webp"
 ---

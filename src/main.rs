@@ -1,8 +1,8 @@
 use models::Post;
 use rocket::fs::FileServer;
 use rocket::launch;
-use std::path::PathBuf;
 use std::sync::Mutex;
+use std::io::Result;
 
 mod models;
 mod routes;
@@ -34,7 +34,10 @@ fn rocket() -> _ {
 }
 
 /// Loads all posts from the content directory at server startup
-fn load_posts() -> std::io::Result<Vec<Post>> {
+fn load_posts() -> Result<Vec<Post>> {
+    use std::path::PathBuf;
+    use std::fs::read_dir;
+
     let content_dir = PathBuf::from("content/posts");
 
     println!("\nAttempting to load posts from: {:?}\n", content_dir);
@@ -44,7 +47,7 @@ fn load_posts() -> std::io::Result<Vec<Post>> {
         return Ok(Vec::new());
     }
 
-    let posts: Vec<Post> = std::fs::read_dir(&content_dir)?
+    let posts: Vec<Post> = read_dir(&content_dir)?
         .filter_map(|entry| {
             let path = match entry {
                 Ok(e) => e.path(),

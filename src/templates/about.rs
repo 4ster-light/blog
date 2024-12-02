@@ -25,7 +25,9 @@ pub fn about_page() -> Markup {
                 }
                 p { "I'm also a big fan and currently exploring the following:" }
                 ul {
+                    li { a href="https://ocaml.org/" { "OCaml" } }
                     li { a href="https://nixos.org/" { "Nix and NixOS" } }
+                    li { a href="https://racket-lang.org/" { "Racket" } }
                     li { a href="https://www.haskell.org/" { "Haskell" } }
                     li { a href="https://webassembly.org/" { "WASM" } }
                 }
@@ -33,7 +35,7 @@ pub fn about_page() -> Markup {
                 p { "I have some hobbies outside of programming too! I like to read books, watch movies, play video games and listen to music. I generally listen to artists like Bruno Mars and Dua Lipa but I like other genres like Brazilian Phonk too. My favourite saga of books and movies are Dune by Frank Herbert and my favourite video game is Super Smash Bros Ultimate. I also like to travel and explore new places :) ." }
                 h3 { "This blog" }
                 p { "This blog is a place where I write about my experiences and thoughts about programming, technology and life in general. I hope you enjoy it :) ." }
-                p { "It is also quite special on the way it's built because it shows my taste for the tech stack I use which in this case is:"}
+                p { "It is also quite special on the way it's built because it shows my taste for the tech stacks I use which in this case is:"}
                 ul {
                     li { a href="https://www.rust-lang.org/" { "Rust" } " with the " a href="https://rocket.rs/" { "Rocket" } " framework" }
                     li { a href="https://tailwindcss.com/" { "Tailwind CSS" } }
