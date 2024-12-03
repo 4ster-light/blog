@@ -19,30 +19,25 @@ And then you ask this “Python devs” to implement some coding example that is
 ```python
 class PrimeGenerator:
     def __init__(self):
-        self.primes = []  # List to store prime numbers
-        self.current = 2  # Start checking from 2 (the first prime number)
+        self._sieve = {}  # Dictionary for sieve storage
+        self.current = 2  # Start checking from 2
 
     def __iter__(self):
         return self
 
     def __next__(self) -> int:
-        # Find the next prime number
-        while True:
-            if all(self.current % prime != 0 for prime in self.primes):
-                self.primes.append(self.current)
-                prime = self.current
-                self.current += 1
-                return prime
+        while self.current in self._sieve:
+            # Move multiples to their next multiple
+            for prime in self._sieve[self.current]:
+                self._sieve.setdefault(prime + self.current, []).append(prime)
+            del self._sieve[self.current]
             self.current += 1
+        # Found a prime
+        self._sieve[self.current * 2] = [self.current]
+        prime = self.current
+        self.current += 1
+        return prime
 
-    def sieve(self):
-        # Generator that yields primes using a sieve-like approach
-        for prime in self:
-            yield prime
-            # Remove multiples of the current prime from further consideration
-            self.primes = [p for p in self.primes if p <= prime]
-
-    # Generate the first n primes
     def take(self, n: int) -> list[int]:
         return [next(self) for _ in range(n)]
 ```
@@ -86,7 +81,7 @@ def benchmark(func):
         start_time = time.time()
         result = func(*args, **kwargs)
         end_time = time.time()
-        print(f"{func.__name__} executed in {end_time - start_time:.6f} seconds.")
+        print(f"Benchmark executed in {end_time-start_time:.6f} seconds.")
         return result
     return wrapper
 
