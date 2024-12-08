@@ -26,9 +26,9 @@ pub fn about_page() -> Markup {
                 p { "I'm also a big fan and currently exploring the following:" }
                 ul {
                     li { a href="https://ocaml.org/" { "OCaml" } }
-                    li { a href="https://nixos.org/" { "Nix and NixOS" } }
                     li { a href="https://racket-lang.org/" { "Racket" } }
                     li { a href="https://www.haskell.org/" { "Haskell" } }
+                    li { a href="https://nixos.org/" { "Nix and NixOS" } }
                     li { a href="https://webassembly.org/" { "WASM" } }
                 }
                 h3 { "About myself" }
@@ -37,9 +37,9 @@ pub fn about_page() -> Markup {
                 p { "This blog is a place where I write about my experiences and thoughts about programming, technology and life in general. I hope you enjoy it :) ." }
                 p { "It is also quite special on the way it's built because it shows my taste for the tech stacks I use which in this case is:"}
                 ul {
-                    li { a href="https://www.rust-lang.org/" { "Rust" } " with the " a href="https://rocket.rs/" { "Rocket" } " framework" }
-                    li { a href="https://tailwindcss.com/" { "Tailwind CSS" } }
-                    li { a href="https://alpinejs.dev/" { "Alpine JS" } }
+                    li { a href="https://www.rust-lang.org/" { "Rust" } " with the " a href="https://github.com/tokio-rs/axum" { "Axum" } " framework and the " a href="https://maud.lambda.xyz/" { "Maud" } " crate for templating" }
+                    li { a href="https://tailwindcss.com/" { "Tailwind CSS" } " for styling" }
+                    li { a href="https://alpinejs.dev/" { "Alpine JS" } " for UI interactions" }
                 }
             }
         },

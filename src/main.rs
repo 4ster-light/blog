@@ -1,7 +1,6 @@
 use axum::{routing::get, Router};
 use std::io::Result;
 use std::sync::Arc;
-use tokio::sync::Mutex;
 use tower_http::services::ServeDir;
 
 mod models;
@@ -14,11 +13,11 @@ async fn main() -> Result<()> {
         Ok(mut posts) => {
             // Sort posts by date (newest first)
             posts.sort_by(|a, b| b.meta.date.cmp(&a.meta.date));
-            Arc::new(Mutex::new(posts))
+            Arc::new(posts)
         }
         Err(e) => {
             eprintln!("Error loading posts: {}", e);
-            Arc::new(Mutex::new(Vec::new()))
+            Arc::new(Vec::new())
         }
     };
 
@@ -30,9 +29,9 @@ async fn main() -> Result<()> {
         .nest_service("/static", ServeDir::new("static"))
         .with_state(posts);
 
-    let listener = tokio::net::TcpListener::bind("0.0.0.0:9112").await.unwrap();
-    println!("Listening on: {}", listener.local_addr().unwrap());
-    axum::serve(listener, app).await.unwrap();
+    let listener = tokio::net::TcpListener::bind("0.0.0.0:9112").await?;
+    println!("Listening on: {}", listener.local_addr()?);
+    axum::serve(listener, app).await?;
 
     Ok(())
 }

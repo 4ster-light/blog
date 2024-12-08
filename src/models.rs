@@ -1,6 +1,7 @@
 use chrono::{DateTime, Utc};
 use pulldown_cmark::{Options, Parser};
 use serde::{Deserialize, Serialize};
+use std::error::Error;
 use std::path::PathBuf;
 
 /// Represents the metadata of a post
@@ -15,6 +16,13 @@ pub struct PostMeta {
     pub image: Option<String>,
 }
 
+impl PostMeta {
+    /// Returns the post's date
+    pub fn date(&self) -> &DateTime<Utc> {
+        &self.parsed_date
+    }
+}
+
 /// Represents a post
 #[derive(Serialize, Deserialize)]
 pub struct Post {
@@ -25,12 +33,14 @@ pub struct Post {
 
 impl Post {
     /// Loads a post from a file path
-    pub fn load(path: PathBuf) -> Result<Self, Box<dyn std::error::Error>> {
-        let content = std::fs::read_to_string(&path)?;
+    pub fn load(path: PathBuf) -> Result<Self, Box<dyn Error>> {
+        use std::fs::read_to_string;
+
+        let content = read_to_string(&path)?;
         let slug = extract_slug(&path)?;
 
         let (frontmatter, markdown_content) = split_content(&content)?;
-        let mut meta: PostMeta = serde_yaml::from_str(frontmatter)?;
+        let mut meta: PostMeta = serde_yaml::from_str(frontmatter.as_str())?;
         parse_date(&mut meta)?;
 
         Ok(Post {
@@ -54,31 +64,26 @@ impl Post {
     }
 }
 
-impl PostMeta {
-    /// Returns the post's date
-    pub fn date(&self) -> &DateTime<Utc> {
-        &self.parsed_date
-    }
-}
-
-fn extract_slug(path: &PathBuf) -> Result<String, Box<dyn std::error::Error>> {
+/// Extracts the slug from a file path by using its filename (without extension)
+fn extract_slug(path: &PathBuf) -> Result<String, Box<dyn Error>> {
     path.file_stem()
         .ok_or_else(|| "Invalid file path: no filename".into())
         .map(|s| s.to_string_lossy().into_owned())
 }
 
-fn split_content(content: &str) -> Result<(&str, &str), Box<dyn std::error::Error>> {
+/// Splits the content into frontmatter and markdown content, handling multiple separator sections
+fn split_content(content: &str) -> Result<(String, String), Box<dyn Error>> {
     let parts: Vec<&str> = content.split("---\n").collect();
     match parts.len() {
-        len if len >= 3 => Ok((parts[1], parts[2])),
+        len if len >= 3 => Ok((parts[1].to_string(), parts[2..].join("---\n"))),
         _ => Err("Invalid markdown format: missing frontmatter".into()),
     }
 }
 
-fn parse_date(meta: &mut PostMeta) -> Result<(), Box<dyn std::error::Error>> {
+/// Parses the date string into a UTC DateTime, setting time to midnight
+fn parse_date(meta: &mut PostMeta) -> Result<(), Box<dyn Error>> {
     match chrono::NaiveDate::parse_from_str(&meta.date, "%Y-%m-%d") {
         Ok(date) => {
-            // Convert the date to DateTime<Utc> by setting the time to midnight UTC
             let datetime = date
                 .and_hms_opt(0, 0, 0)
                 .ok_or_else(|| "Failed to create datetime")?;

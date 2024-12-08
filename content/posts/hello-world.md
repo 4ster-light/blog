@@ -35,4 +35,6 @@ Probably my GitHub gives a better view of my stuff either now or whenever you ar
 
 So, yeah, that's pretty much my story and who I am, I may have changed in the future, as I've mentioned several times I'm writing this at 17 years old. My writing skills nor storytelling capabilities may not be the best, but I'm sure I'll get better jajaja, I hope you enjoy all of my contents and/or apps, so, as said, **SEE YOU AROUND!!!**
 
+---
+
 ## x)
