@@ -1,42 +1,46 @@
-use models::Post;
-use rocket::fs::FileServer;
-use rocket::launch;
-use std::sync::Mutex;
+use axum::{routing::get, Router};
 use std::io::Result;
+use std::sync::Arc;
+use tokio::sync::Mutex;
+use tower_http::services::ServeDir;
 
 mod models;
 mod routes;
 mod templates;
 
-#[launch]
-fn rocket() -> _ {
+#[tokio::main]
+async fn main() -> Result<()> {
     let posts = match load_posts() {
         Ok(mut posts) => {
             // Sort posts by date (newest first)
             posts.sort_by(|a, b| b.meta.date.cmp(&a.meta.date));
-            Mutex::new(posts)
+            Arc::new(Mutex::new(posts))
         }
         Err(e) => {
             eprintln!("Error loading posts: {}", e);
-            Mutex::new(Vec::new())
+            Arc::new(Mutex::new(Vec::new()))
         }
     };
 
-    rocket::build()
-        .mount("/", rocket::routes![
-            routes::index,
-            routes::about,
-            routes::contact,
-            routes::posts
-        ])
-        .mount("/static", FileServer::from("static"))
-        .manage(posts)
+    let app = Router::new()
+        .route("/", get(routes::index))
+        .route("/about", get(routes::about))
+        .route("/contact", get(routes::contact))
+        .route("/posts/:slug", get(routes::posts))
+        .nest_service("/static", ServeDir::new("static"))
+        .with_state(posts);
+
+    let listener = tokio::net::TcpListener::bind("0.0.0.0:9112").await.unwrap();
+    println!("Listening on: {}", listener.local_addr().unwrap());
+    axum::serve(listener, app).await.unwrap();
+
+    Ok(())
 }
 
 /// Loads all posts from the content directory at server startup
-fn load_posts() -> Result<Vec<Post>> {
-    use std::path::PathBuf;
+fn load_posts() -> Result<Vec<models::Post>> {
     use std::fs::read_dir;
+    use std::path::PathBuf;
 
     let content_dir = PathBuf::from("content/posts");
 
@@ -47,7 +51,7 @@ fn load_posts() -> Result<Vec<Post>> {
         return Ok(Vec::new());
     }
 
-    let posts: Vec<Post> = read_dir(&content_dir)?
+    let posts: Vec<models::Post> = read_dir(&content_dir)?
         .filter_map(|entry| {
             let path = match entry {
                 Ok(e) => e.path(),
@@ -59,7 +63,7 @@ fn load_posts() -> Result<Vec<Post>> {
 
             if path.extension().map_or(false, |ext| ext == "md") {
                 println!("Found markdown file at: {:?}", path);
-                match Post::load(path.clone()) {
+                match models::Post::load(path.clone()) {
                     Ok(post) => {
                         println!("Successfully loaded post: {}", post.meta.title);
                         Some(post)
