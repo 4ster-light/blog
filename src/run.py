@@ -33,4 +33,4 @@ def post(slug):
 
 
 if __name__ == "__main__":
-    app.run(debug=False, port=9112)
+    app.run(port=9112)

@@ -4,11 +4,38 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>✰λster✰</title>
+    <title>{{ post.meta.title if post else "✰λster✰" }}</title>
+    <meta name="description"
+        content="{{ post.meta.description if post else 'A blog about programming, technology, and life.' }}">
+
+    <!-- Open Graph / Facebook -->
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="{{ request.url }}">
+    <meta property="og:title" content="{{ post.meta.title if post else '✰λster✰' }}">
+    <meta property="og:description"
+        content="{{ post.meta.description if post else 'A blog about programming, technology, and life.' }}">
+    <meta property="og:image"
+        content="{{ post.meta.image if post and post.meta.image else url_for('static', filename='images/placeholder.webp') }}">
+
+    <!-- Twitter -->
+    <meta property="twitter:card" content="summary_large_image">
+    <meta property="twitter:url" content="{{ request.url }}">
+    <meta property="twitter:title" content="{{ post.meta.title if post else '✰λster✰' }}">
+    <meta property="twitter:description"
+        content="{{ post.meta.description if post else 'A blog about programming, technology, and life.' }}">
+    <meta property="twitter:image"
+        content="{{ post.meta.image if post and post.meta.image else url_for('static', filename='images/placeholder.webp') }}">
+
+    <!-- Canonical URL -->
+    <link rel="canonical" href="{{ request.url }}">
+
+    <!-- Stylesheets -->
     <link rel="stylesheet" href="{{ url_for('static', filename='css/tailwind.css') }}">
     <link rel="stylesheet" href="{{ url_for('static', filename='css/code.css') }}">
     <link rel="stylesheet"
         href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/plugins/toolbar/prism-toolbar.min.css">
+
+    <!-- Scripts -->
     <script defer src="https://cdn.jsdelivr.net/npm/alpinejs@3.14.3/dist/cdn.min.js"></script>
     <script defer src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-core.min.js"></script>
     <script defer

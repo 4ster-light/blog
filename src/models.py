@@ -1,3 +1,4 @@
+from dataclasses import dataclass
 from datetime import datetime
 import markdown
 import yaml
@@ -13,11 +14,11 @@ class PostMeta:
         self.image = image
 
 
+@dataclass
 class Post:
-    def __init__(self, slug, content, meta):
-        self.slug = slug
-        self.content = content
-        self.meta = meta
+    slug: str
+    content: str
+    meta: PostMeta
 
     @classmethod
     def load(cls, path):
