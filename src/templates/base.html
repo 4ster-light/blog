@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>✰λster✰</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/tailwind.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/code.css') }}">
+    <link rel="stylesheet"
+        href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/plugins/toolbar/prism-toolbar.min.css">
+    <script defer src="https://cdn.jsdelivr.net/npm/alpinejs@3.14.3/dist/cdn.min.js"></script>
+    <script defer src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-core.min.js"></script>
+    <script defer
+        src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/plugins/autoloader/prism-autoloader.min.js"></script>
+    <script defer
+        src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/plugins/toolbar/prism-toolbar.min.js"></script>
+    <script defer
+        src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/plugins/copy-to-clipboard/prism-copy-to-clipboard.min.js"></script>
+</head>
+
+<body
+    class="min-h-screen flex flex-col bg-gruvbox-bg dark:bg-gruvbox-bg-dark text-gruvbox-fg dark:text-gruvbox-fg-dark transition-colors duration-300">
+    <header
+        class="border-b border-gruvbox-border-light dark:border-gruvbox-border-dark bg-gruvbox-bg-s dark:bg-gruvbox-bg-h-dark shadow-sm">
+        <nav class="max-w-3xl mx-auto px-6 py-4" x-data="{ open: false }">
+            <div class="flex justify-between items-center">
+                <a href="/"
+                    class="text-2xl font-bold text-gruvbox-yellow dark:text-gruvbox-orange-bright hover:text-gruvbox-orange dark:hover:text-gruvbox-yellow-bright transform transition duration-300">
+                    ✰λster✰
+                </a>
+
+                <!-- Mobile Menu Toggle Button -->
+                <button
+                    class="sm:hidden text-gruvbox-fg dark:text-gruvbox-fg-dark focus:outline-none relative flex flex-col justify-center items-center space-y-1"
+                    aria-label="Toggle Menu" x-on:click="open = !open">
+                    <!-- Hamburger Icon -->
+                    <div class="w-6 h-0.5 bg-current rounded-md transform transition-transform duration-700 ease-in-out"
+                        :class="open ? 'rotate-45 translate-y-1.5' : ''"></div>
+                    <div class="w-6 h-0.5 bg-current rounded-md transform transition-opacity duration-700 ease-in-out"
+                        :class="open ? 'opacity-0' : ''"></div>
+                    <div class="w-6 h-0.5 bg-current rounded-md transform transition-transform duration-700 ease-in-out"
+                        :class="open ? '-rotate-45 -translate-y-1.5' : ''"></div>
+                </button>
+
+                <!-- Desktop Navigation Links -->
+                <div class="hidden sm:flex space-x-10">
+                    <a href="/"
+                        class="text-gruvbox-fg dark:text-gruvbox-fg-dark hover:text-gruvbox-green dark:hover:text-gruvbox-green-bright relative group">Home</a>
+                    <a href="/about"
+                        class="text-gruvbox-fg dark:text-gruvbox-fg-dark hover:text-gruvbox-yellow dark:hover:text-gruvbox-yellow-bright relative group">About</a>
+                    <a href="/contact"
+                        class="text-gruvbox-fg dark:text-gruvbox-fg-dark hover:text-gruvbox-orange dark:hover:text-gruvbox-orange-bright relative group">Contact</a>
+                </div>
+            </div>
+
+            <!-- Mobile Menu (Hidden by Default) -->
+            <div id="mobile-menu"
+                class="sm:hidden overflow-hidden flex flex-col space-y-3 transition-all duration-700 ease-in-out"
+                :class="open ? 'max-h-screen opacity-100 mt-6' : 'max-h-0 opacity-0'">
+                <a href="/"
+                    class="text-gruvbox-fg dark:text-gruvbox-fg-dark hover:text-gruvbox-green dark:hover:text-gruvbox-green-bright relative group px-4 py-2">Home</a>
+                <a href="/about"
+                    class="text-gruvbox-fg dark:text-gruvbox-fg-dark hover:text-gruvbox-yellow dark:hover:text-gruvbox-yellow-bright relative group px-4 py-2">About</a>
+                <a href="/contact"
+                    class="text-gruvbox-fg dark:text-gruvbox-fg-dark hover:text-gruvbox-orange dark:hover:text-gruvbox-orange-bright relative group px-4 py-2">Contact</a>
+            </div>
+        </nav>
+    </header>
+
+    <main class="flex-grow max-w-3xl mx-auto px-6 py-8 w-full">
+        {% block content %}{% endblock %}
+    </main>
+
+    <footer
+        class="mt-auto border-t border-gruvbox-border-light dark:border-gruvbox-border-dark bg-gruvbox-bg-s dark:bg-gruvbox-bg-h-dark shadow-sm">
+        <div class="max-w-3xl mx-auto px-6 py-4 text-center text-gruvbox-fg dark:text-gruvbox-fg-dark">
+            <p>© 2024 ✰λster✰</p>
+        </div>
+    </footer>
+</body>
+
+</html>

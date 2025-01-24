@@ -1,0 +1,31 @@
+{% extends "base.html" %}
+
+{% block content %}
+<article>
+    <div class="mb-8 pb-6 border-b border-gruvbox-border-light dark:border-gruvbox-border-dark">
+        <img class="w-full rounded-lg shadow-lg mb-10"
+            src="{{ post.meta.image if post.meta.image else url_for('static', filename='images/placeholder.webp') }}"
+            alt="Post image">
+        <h1 class="text-4xl font-bold mb-4 text-gruvbox-yellow dark:text-gruvbox-orange-bright text-balance">
+            {{ post.meta.title }}
+        </h1>
+        <div class="flex flex-col space-y-3 sm:flex-row sm:items-center sm:justify-between sm:space-y-0">
+            <time class="text-base font-medium text-gruvbox-fg dark:text-gruvbox-fg-dark"
+                datetime="{{ post.meta.date.strftime('%Y-%m-%d') }}">
+                {{ post.meta.date.strftime('%B %d, %Y') }}
+            </time>
+            <div class="flex flex-wrap gap-1.5">
+                {% for tag in post.meta.tags %}
+                <span
+                    class="inline-block bg-gruvbox-yellow/5 dark:bg-gruvbox-yellow-bright/5 text-gruvbox-yellow dark:text-gruvbox-yellow-bright rounded-full px-2.5 py-1 text-xs font-medium border border-gruvbox-yellow/10 dark:border-gruvbox-yellow-bright/10 hover:bg-gruvbox-yellow hover:text-gruvbox-bg dark:hover:bg-gruvbox-yellow-bright dark:hover:text-gruvbox-bg-dark transition-all duration-300 shadow-sm hover:shadow-md">
+                    {{ tag }}
+                </span>
+                {% endfor %}
+            </div>
+        </div>
+    </div>
+    <div class="prose dark:prose-invert prose-base max-w-none text-pretty">
+        {{ post.render_content() | safe }}
+    </div>
+</article>
+{% endblock %}

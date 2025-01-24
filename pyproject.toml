@@ -1,0 +1,16 @@
+[project]
+name = "website"
+version = "0.1.0"
+description = "My personal website and blog"
+readme = "README.md"
+requires-python = ">=3.13"
+dependencies = [
+    "flask>=3.1.0",
+    "markdown>=3.7",
+    "pyyaml>=6.0.2",
+]
+
+[dependency-groups]
+dev = [
+    "ruff>=0.9.3",
+]
