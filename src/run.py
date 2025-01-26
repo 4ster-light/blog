@@ -26,10 +26,10 @@ def contact():
 @app.route("/posts/<slug>")
 def post(slug):
     posts = load_posts(app)
-    post = next((p for p in posts if p.slug == slug), None)
-    if not post:
+    blogpost = next((p for p in posts if p.slug == slug), None)
+    if not blogpost:
         abort(404)
-    return render_template("post.html", post=post)
+    return render_template("post.html", post=blogpost)
 
 
 if __name__ == "__main__":
