@@ -1,12 +1,20 @@
 from dataclasses import dataclass
 from datetime import datetime
+from typing import Optional
 import markdown
 import yaml
 import os
 
 
 class PostMeta:
-    def __init__(self, title, description, date, tags, image=None):
+    def __init__(
+        self,
+        title: str,
+        description: str,
+        date: str,
+        tags: list[str],
+        image: Optional[str] = None,
+    ):
         self.title = title
         self.description = description
         self.date = datetime.strptime(date, "%Y-%m-%d")
@@ -21,7 +29,7 @@ class Post:
     meta: PostMeta
 
     @classmethod
-    def load(cls, path):
+    def load(cls, path: str):
         with open(path, "r", encoding="utf-8") as file:
             content = file.read()
 
@@ -43,7 +51,7 @@ class Post:
 
         return cls(slug, markdown_content, meta)
 
-    def render_content(self):
+    def render_content(self) -> str:
         return markdown.markdown(
             self.content, extensions=["fenced_code", "tables", "codehilite"]
         )

@@ -24,7 +24,7 @@ def contact():
 
 
 @app.route("/posts/<slug>")
-def post(slug):
+def post(slug: str):
     posts = load_posts(app)
     blogpost = next((p for p in posts if p.slug == slug), None)
     if not blogpost:

@@ -1,8 +1,9 @@
 import os
 from models import Post
+from flask import Flask
 
 
-def load_posts(app):
+def load_posts(app: Flask) -> list[Post]:
     posts_dir = app.config["POSTS_DIR"]
     posts = []
 

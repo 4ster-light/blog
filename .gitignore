@@ -13,5 +13,6 @@ wheels/
 # Bun
 node_modules/
 
-# VS Code
+# IDEs
+.idea/
 .vscode/
