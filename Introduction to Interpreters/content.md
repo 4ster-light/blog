@@ -5,26 +5,6 @@ date: "2025-08-16"
 tags: ["tutorial", "interpreter", "parser", "lexer", "evaluator", "python"]
 ---
 
-## Table of Contents
-
-- [What is a logic evaluator?](#what-is-a-logic-evaluator)
-- [Interpreter](#interpreter)
-  - [The Lexer](#the-lexer)
-    - [1. Concept](#1-concept)
-    - [2. Types of Tokens](#2-types-of-tokens)
-    - [3. Lexing](#3-lexing)
-  - [The Parser](#the-parser)
-    - [1. Concept](#1-concept-1)
-    - [2. Types of AST Nodes](#2-types-of-ast-nodes)
-    - [3. Parsing](#3-parsing)
-  - [The Evaluator](#the-evaluator)
-    - [1. Concept](#1-concept-2)
-    - [2. Evaluating the AST](#2-evaluating-the-ast)
-- [Conclusion](#conclusion)
-- [Sponsor](#sponsor)
-
----
-
 Ever since I started my programming journey I have been amazed at how we
 achieved human-computer "communication". The ability to write programs instead
 of crafting different devices hardcoded for a single purpose was one of the
@@ -554,21 +534,11 @@ complex example, it still shows the power of the interpreter and how it can be
 used to evaluate any kind of computation.
 
 As always, thanks for reading and if you have any questions or comments feel
-free to reach out to me on [X/Twitter](https://x.com/4ster_light) or by mail at
-[davidvivarbogonez@gmail.com](mailto:davidvivarbogonez@gmail.com), I am always
-open to criticism, just like I hope you did by reading this, I am always trying
-to learn and improve.
-
-> Also, as a bonus, you can find a version of this project in F# in
-> [github.com/4ster-light/f-logic](https://github.com/4ster-light/f-logic/), for
-> those who are interested and wanna expand their learning further, you will
-> find interesting ways that Functional Programming helps in this kind of
-> problems, as well as algebraic data types, discriminated unions, pattern
-> matching, etc.
+free to reach out to me on any of my socials, see at my
+[Link Tree](https://bio.4ster.dev), I am always open to criticism, just like I
+hope you did by reading this, I am always trying to learn and improve.
 
 ## Sponsor
 
-> If you liked this post and found it useful, consider supporting me by _buying
-> me a coffee_ or becoming a member of my community on **Ko-fi** where I post
-> more content like this and advertise my own projects as well (link on button
-> below).
+If you liked this post and found it useful, consider supporting me by any of
+the channels listed in my sponsors page (linked with the button just below).

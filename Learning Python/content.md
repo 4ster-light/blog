@@ -153,7 +153,8 @@ def benchmark(func):
         start_time = time.time()
         result = func(*args, **kwargs)
         end_time = time.time()
-        print(f"Benchmark executed in {end_time-start_time:.6f} seconds.")
+        dt = end_time - start_time
+        print(f"Benchmark executed in {dt:.6f} seconds.")
         return result
     return wrapper
 
