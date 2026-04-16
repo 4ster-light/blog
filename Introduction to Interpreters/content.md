@@ -540,5 +540,5 @@ hope you did by reading this, I am always trying to learn and improve.
 
 ## Sponsor
 
-If you liked this post and found it useful, consider supporting me by any of
-the channels listed in my sponsors page (linked with the button just below).
+If you liked this post and found it useful, consider supporting me by any of the
+channels listed in my sponsors page (linked with the button just below).
